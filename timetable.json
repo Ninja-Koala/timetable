@@ -1,0 +1,101 @@
+{
+	"week":[
+		{
+			"name":"Monday",
+			"events":[
+				{
+					"room":"ENC-D 114",
+					"name":"Tutorium",
+					"course":"Analysis II",
+					"time":{
+						"hour":"8",
+						"minute":"15"
+					}
+				},
+				{
+					"room":"ENC-D 114",
+					"name":"Tutorium",
+					"course":"Analysis II",
+					"time":{
+						"hour":"12",
+						"minute":"15"
+					}
+				},
+				{
+					"room":"ENC-D 114",
+					"name":"Vorlesung",
+					"course":"Analysis II",
+					"time":{
+						"hour":"14",
+						"minute":"15"
+					}
+				},
+				{
+					"room":"ENC-D 114",
+					"name":"Vorlesung",
+					"course":"Analysis II",
+					"time":{
+						"hour":"16",
+						"minute":"15"
+					}
+				}
+			]
+		},
+		{
+			"name":"Tuesday",
+			"events":[
+				{
+					"room":"ENC-D 114",
+					"name":"Tutorium",
+					"course":"Analysis II",
+					"time":{
+						"hour":"8",
+						"minute":"15"
+					}
+				}
+			]
+		},
+		{
+			"name":"Wednesday",
+			"events":[
+				{
+					"room":"ENC-D 114",
+					"name":"Tutorium",
+					"course":"Analysis II",
+					"time":{
+						"hour":"10",
+						"minute":"15"
+					}
+				}
+			]
+		},
+		{
+			"name":"Thursday",
+			"events":[
+				{
+					"room":"ENC-D 114",
+					"name":"Tutorium",
+					"course":"Analysis II",
+					"time":{
+						"hour":"10",
+						"minute":"30"
+					}
+				}
+			]
+		},
+		{
+			"name":"Friday",
+			"events":[
+				{
+					"room":"ENC-D 114",
+					"name":"Tutorium",
+					"course":"Analysis II",
+					"time":{
+						"hour":"10",
+						"minute":"30"
+					}
+				}
+			]
+		}
+	]
+}
