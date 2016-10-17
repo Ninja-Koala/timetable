@@ -28,17 +28,17 @@ except:
 	print("Couldn't open file")
 	exit(1)
 
-column_width=150
+column_width=300
 
-svg_text="\t<text font-family=\"Monospace\" x=\"{0}\" y=\"{1}\" fill=\"black\" style=\"font-size:18px\" text-anchor=\"middle\">{2}</text>\n"
+svg_text="\t<text font-family=\"Monospace\" x=\"{0}\" y=\"{1}\" fill=\"black\" style=\"font-size:36px\" text-anchor=\"middle\">{2}</text>\n"
 
-svg_box="M20 20 L{0} 20 L{0} 540 L20 540 Z"
-svg_hor_line="M20 50 L{0} 50"
-svg_ver_line="\t\t\tM{0} 20 L{0} 540\n"
+svg_box="M40 40 L{0} 40 L{0} 1080 L40 1080 Z"
+svg_hor_line="M40 100 L{0} 100"
+svg_ver_line="\t\t\tM{0} 40 L{0} 1080\n"
 
 
 svg_ver_lines=""
-lines_pos=170
+lines_pos=340
 for i in range(len(timetable["week"])-1):
 	svg_ver_lines+=svg_ver_line.format(lines_pos)
 	lines_pos+=column_width
@@ -47,15 +47,15 @@ svg_box=svg_box.format(lines_pos)
 svg_hor_line=svg_hor_line.format(lines_pos)
 
 full_text=""
-text_pos=100
+text_pos=200
 for day in timetable["week"]:
-	full_text+=svg_text.format(text_pos,40,day["name"])
+	full_text+=svg_text.format(text_pos,80,day["name"])
 	for event in day["events"]:
-		ver_pos=70+(int(event["time"]["hour"])*60+int(event["time"]["minute"])-480)*0.75
+		ver_pos=140+(int(event["time"]["hour"])*120+int(event["time"]["minute"])-960)*0.75
 		full_text+=svg_text.format(text_pos,ver_pos+00,event["time"]["hour"] + ":" + event["time"]["minute"])
-		full_text+=svg_text.format(text_pos,ver_pos+20,event["course"])
-		full_text+=svg_text.format(text_pos,ver_pos+40,event["name"])
-		full_text+=svg_text.format(text_pos,ver_pos+60,"("+event["room"]+")")
+		full_text+=svg_text.format(text_pos,ver_pos+40,event["course"])
+		full_text+=svg_text.format(text_pos,ver_pos+80,event["name"])
+		full_text+=svg_text.format(text_pos,ver_pos+120,"("+event["room"]+")")
 	text_pos+=column_width
 
 
@@ -67,12 +67,12 @@ svg_path="""\"
 
 template="""\
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg height="560" width="{0}" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg height="1120" width="{0}" version="1.1" xmlns="http://www.w3.org/2000/svg">
 	<rect x="0" y="0" width="100%" height="100%" fill="white"/>
 	<path d={1}
-	style="fill:none;stroke:black;stroke-width:3" />
+	style="fill:none;stroke:black;stroke-width:6" />
 {2}</svg>
-""".format(lines_pos+20,svg_path,full_text)
+""".format(lines_pos+40,svg_path,full_text)
 
 try:
 	svg_file=open(output_file,"w")
