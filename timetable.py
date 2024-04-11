@@ -4,22 +4,25 @@ import json, sys
 input_file=""
 output_file=""
 
-column_width=350
+column_width=300
 
-weekday_y_pos=80
+weekday_y_pos=94
 
 border_x=40
 border_y=40
 
 box_end_y=1080
 
-text_line_spacing=40
+text_line_spacing=57
 
-hor_line_pos=100
+hor_line_pos=120
 
-font_size=36
+font_size=50
 
 stroke_width=6
+
+event_pos_start=160
+event_pos_factor=1.1
 
 if len(sys.argv)<2:
 	print("Usage: ./timetable.py input_json_file [output_svg_file]")
@@ -45,7 +48,7 @@ except:
 	print("Couldn't open file")
 	exit(1)
 
-svg_text="\t<text font-family=\"Monospace\" x=\"{0}\" y=\"{1}\" fill=\"black\" style=\"font-size:{2}px\" text-anchor=\"middle\">{3}</text>\n"
+svg_text="\t<text font-family=\"Dosis\" font-weight=\"600\" x=\"{0}\" y=\"{1}\" fill=\"black\" style=\"font-size:{2}px\" text-anchor=\"middle\">{3}</text>\n"
 
 svg_box="M{0} {1} L{2} {1} L{2} {3} L{0} {3} Z"
 svg_hor_line="M{0} {1} L{2} {1}"
@@ -68,11 +71,12 @@ for day in timetable["week"]:
 	full_text+=svg_text.format(text_x_pos,weekday_y_pos,font_size,day["name"])
 	for event in day["events"]:
 		#TODO: better (configurable) time scaling
-		ver_pos=140+(int(event["time"]["hour"])*120+int(event["time"]["minute"])-960)*0.75
+		ver_pos=event_pos_start+(int(event["time"]["hour"])*120+int(event["time"]["minute"])-960)*event_pos_factor
 		full_text+=svg_text.format(text_x_pos,ver_pos+0*text_line_spacing,font_size,event["time"]["hour"] + ":" + event["time"]["minute"])
 		full_text+=svg_text.format(text_x_pos,ver_pos+1*text_line_spacing,font_size,event["course"])
 		full_text+=svg_text.format(text_x_pos,ver_pos+2*text_line_spacing,font_size,event["name"])
-		full_text+=svg_text.format(text_x_pos,ver_pos+3*text_line_spacing,font_size,"("+event["room"]+")")
+		if len(event["room"])>0:
+			full_text+=svg_text.format(text_x_pos,ver_pos+3*text_line_spacing,font_size,event["room"])
 	text_x_pos+=column_width
 
 
