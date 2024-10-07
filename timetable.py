@@ -4,14 +4,14 @@ import json, sys
 input_file=""
 output_file=""
 
-column_width=300
+column_width=386
 
 weekday_y_pos=94
 
 border_x=40
 border_y=40
 
-box_end_y=1080
+box_end_y=1450
 
 text_line_spacing=57
 
