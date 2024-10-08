@@ -48,7 +48,7 @@ except:
 	print("Couldn't open file")
 	exit(1)
 
-svg_text="\t<text font-family=\"Dosis\" font-weight=\"600\" x=\"{0}\" y=\"{1}\" fill=\"black\" style=\"font-size:{2}px\" text-anchor=\"middle\">{3}</text>\n"
+svg_text="\t\t<text x=\"{0:.9g}\" y=\"{1:.9g}\">{2}</text>\n"
 
 svg_box="M{0} {1} L{2} {1} L{2} {3} L{0} {3} Z"
 svg_hor_line="M{0} {1} L{2} {1}"
@@ -68,15 +68,15 @@ text_x_pos=border_x+column_width/2
 
 full_text=""
 for day in timetable["week"]:
-	full_text+=svg_text.format(text_x_pos,weekday_y_pos,font_size,day["name"])
+	full_text+=svg_text.format(text_x_pos,weekday_y_pos,day["name"])
 	for event in day["events"]:
 		#TODO: better (configurable) time scaling
 		ver_pos=event_pos_start+(int(event["time"]["hour"])*120+int(event["time"]["minute"])-960)*event_pos_factor
-		full_text+=svg_text.format(text_x_pos,ver_pos+0*text_line_spacing,font_size,event["time"]["hour"] + ":" + event["time"]["minute"])
-		full_text+=svg_text.format(text_x_pos,ver_pos+1*text_line_spacing,font_size,event["course"])
-		full_text+=svg_text.format(text_x_pos,ver_pos+2*text_line_spacing,font_size,event["name"])
+		full_text+=svg_text.format(text_x_pos,ver_pos+0*text_line_spacing,event["time"]["hour"] + ":" + event["time"]["minute"])
+		full_text+=svg_text.format(text_x_pos,ver_pos+1*text_line_spacing,event["course"])
+		full_text+=svg_text.format(text_x_pos,ver_pos+2*text_line_spacing,event["name"])
 		if len(event["room"])>0:
-			full_text+=svg_text.format(text_x_pos,ver_pos+3*text_line_spacing,font_size,event["room"])
+			full_text+=svg_text.format(text_x_pos,ver_pos+3*text_line_spacing,event["room"])
 	text_x_pos+=column_width
 
 
@@ -91,9 +91,11 @@ template="""\
 <svg height="{0}" width="{1}" version="1.1" xmlns="http://www.w3.org/2000/svg">
 	<rect x="0" y="0" width="100%" height="100%" fill="white"/>
 	<path d={2}
-	style="fill:none;stroke:black;stroke-width:{3}" />
-{4}</svg>
-""".format(box_end_y+border_y,ver_line_pos+border_x,svg_path,stroke_width,full_text)
+	style="fill:none;stroke:black;stroke-width:{3}"/>
+	<g font-family=\"Dosis\" font-weight=\"600\"  fill=\"black\" style=\"font-size:{4}px\" text-anchor=\"middle\">
+{5}	</g>
+</svg>
+""".format(box_end_y+border_y,ver_line_pos+border_x,svg_path,stroke_width,font_size,full_text)
 
 try:
 	svg_file=open(output_file,"w")
