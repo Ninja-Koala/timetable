@@ -4,25 +4,25 @@ import json, sys
 input_file=""
 output_file=""
 
-column_width=386
+column_width=240
 
-weekday_y_pos=94
+weekday_y_pos=57
 
-border_x=40
-border_y=40
+border_x=24
+border_y=24
 
-box_end_y=1450
+box_end_y=876
 
-text_line_spacing=57
+text_line_spacing=34
 
-hor_line_pos=120
+hor_line_pos=72
 
-font_size=50
+font_size=30
 
-stroke_width=6
+stroke_width=3.6
 
-event_pos_start=160
-event_pos_factor=1.1
+event_pos_start=97
+event_pos_factor=0.66
 
 if len(sys.argv)<2:
 	print("Usage: ./timetable.py input_json_file [output_svg_file]")
@@ -88,7 +88,7 @@ svg_path="""\"
 
 template="""\
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg height="{0}" width="{1}" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg width="{0}" height="{1}" version="1.1" xmlns="http://www.w3.org/2000/svg">
 	<defs>
 		<style type="text/css">
 			@font-face {{
@@ -103,7 +103,7 @@ template="""\
 	<g font-family=\"Dosis\" font-weight=\"600\"  fill=\"black\" style=\"font-size:{4}px\" text-anchor=\"middle\">
 {5}	</g>
 </svg>
-""".format(box_end_y+border_y,ver_line_pos+border_x,svg_path,stroke_width,font_size,full_text)
+""".format(ver_line_pos+border_x,box_end_y+border_y,svg_path,stroke_width,font_size,full_text)
 
 try:
 	svg_file=open(output_file,"w")
