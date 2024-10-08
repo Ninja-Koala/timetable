@@ -89,6 +89,14 @@ svg_path="""\"
 template="""\
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg height="{0}" width="{1}" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<style type="text/css">
+			@font-face {{
+			font-family: Dosis;
+			src: url('Dosis-VariableFont_wght.woff2');
+		}}
+		</style>
+	</defs>
 	<rect x="0" y="0" width="100%" height="100%" fill="white"/>
 	<path d={2}
 	style="fill:none;stroke:black;stroke-width:{3}"/>
